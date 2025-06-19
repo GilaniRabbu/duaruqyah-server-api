@@ -3,7 +3,6 @@ import httpStatus from 'http-status';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import bodyParser from 'body-parser';
 import router from './app/routes';
 import GlobalErrorHandler from './app/middlewares/globalErrorHandler';
 import morgan from 'morgan';
@@ -22,8 +21,7 @@ app.use(express.json());
 app.use(morgan('dev')); // Remove in production
 app.use(cors(corsOptions)); // CORS setup
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
